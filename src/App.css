@@ -1,0 +1,62 @@
+/* Basic styling for the App */
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: #282c34;
+  color: white;
+  font-family: Arial, sans-serif;
+}
+
+.game-container {
+  display: flex;
+  gap: 20px;
+  margin-top: 50px;
+}
+
+/* Tower styling */
+.tower {
+  width: 150px;
+  height: 250px;
+  background-color: #444;
+  border-bottom: 10px solid #888;
+  display: flex;
+  flex-direction: column-reverse; /* Disks stack from bottom up */
+  align-items: center;
+  justify-content: flex-start;
+  padding-bottom: 10px;
+  position: relative;
+}
+
+.tower-label {
+  position: absolute;
+  top: -30px;
+  font-size: 1.2em;
+}
+
+/* Disk styling */
+.disk {
+  height: 20px;
+  margin-bottom: 2px;
+  border-radius: 10px;
+  cursor: grab;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8em;
+  color: black;
+  font-weight: bold;
+}
+
+.disk:active {
+  cursor: grabbing;
+}
+
+/* Specific disk colors and widths (example, these might be dynamic in JS) */
+.disk-yellow { background-color: yellow; width: 60px; }
+.disk-orange { background-color: orange; width: 80px; }
+.disk-green { background-color: green; width: 100px; }
+.disk-blue { background-color: blue; width: 120px; }
+.disk-purple { background-color: purple; width: 140px; }
