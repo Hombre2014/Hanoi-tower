@@ -14,7 +14,7 @@ const Disk: React.FC<DiskProps> = ({ size, diskId, onDragStart, towerIndex }) =>
 
   return (
     <div
-      className="h-8 rounded-md flex items-center justify-center text-white cursor-grab mb-1"
+      className="relative h-8 rounded-md flex items-center justify-center text-white cursor-grab mb-1 z-10"
       style={{ width, backgroundColor: color }}
       draggable
       onDragStart={(e) => onDragStart(e, diskId, towerIndex)}
@@ -30,17 +30,23 @@ interface TowerProps {
   onDrop: (e: React.DragEvent<HTMLDivElement>, targetTowerIndex: number) => void;
   onDragOver: (e: React.DragEvent<HTMLDivElement>) => void;
   onDragStart: (e: React.DragEvent<HTMLDivElement>, diskId: number, towerIndex: number) => void;
+  draggedDisk: { diskId: number; sourceTower: number } | null;
 }
 
-const Tower: React.FC<TowerProps> = ({ disks, towerIndex, onDrop, onDragOver, onDragStart }) => {
+const Tower: React.FC<TowerProps> = ({ disks, towerIndex, onDrop, onDragOver, onDragStart, draggedDisk }) => {
+  // The disks should always be rendered as they are in the state.
+  // The visual removal from the source tower happens only after a successful drop.
+  const disksToRender = disks;
+
   return (
     <div
       className="relative w-64 h-80 bg-gray-200 border-b-[5px] border-gray-700 flex flex-col-reverse items-center justify-start p-2 pt-0"
       onDrop={(e) => onDrop(e, towerIndex)}
       onDragOver={onDragOver}
     >
-      <div className="absolute bottom-0 w-[5px] h-full bg-gray-800"></div>
-      {disks.map((diskId) => (
+      {/* Always render the vertical line with z-0 */}
+      <div className="absolute bottom-0 w-[5px] h-full bg-gray-800 z-0"></div>
+      {disksToRender.map((diskId) => (
         <Disk
           key={diskId}
           size={diskId}
@@ -139,6 +145,7 @@ const App: React.FC = () => {
             onDrop={handleDrop}
             onDragOver={handleDragOver}
             onDragStart={handleDragStart}
+            draggedDisk={draggedDisk}
           />
         ))}
       </div>
