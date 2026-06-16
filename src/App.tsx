@@ -10,7 +10,7 @@ interface DiskProps {
 
 const Disk: React.FC<DiskProps> = ({ size, diskId, onDragStart, towerIndex }) => {
   const width = `${size * 20 + 40}px`;
-  const color = `hsl(${size * 60}, 70%, 50%)`;
+  const color = diskId === 4 ? 'violet' : `hsl(${size * 60}, 70%, 50%)`;
 
   return (
     <div
@@ -35,11 +35,11 @@ interface TowerProps {
 const Tower: React.FC<TowerProps> = ({ disks, towerIndex, onDrop, onDragOver, onDragStart }) => {
   return (
     <div
-      className="relative w-64 h-80 bg-gray-200 border-b-8 border-gray-700 flex flex-col-reverse items-center justify-start p-2 pt-0"
+      className="relative w-64 h-80 bg-gray-200 border-b-[5px] border-gray-700 flex flex-col-reverse items-center justify-start p-2 pt-0"
       onDrop={(e) => onDrop(e, towerIndex)}
       onDragOver={onDragOver}
     >
-      <div className="absolute bottom-0 w-2 h-full bg-gray-700"></div>
+      <div className="absolute bottom-0 w-[5px] h-full bg-gray-800"></div>
       {disks.map((diskId) => (
         <Disk
           key={diskId}
