@@ -19,7 +19,7 @@ const Disk: React.FC<DiskProps> = ({ size, diskId, onDragStart, towerIndex }) =>
       draggable
       onDragStart={(e) => onDragStart(e, diskId, towerIndex)}
     >
-      {diskId}
+      {/* Removed diskId display */}
     </div>
   );
 };
